@@ -17,11 +17,11 @@ std::string BuildDefaultPath(const char *relative_path) {
 const std::string kImagePath = BuildDefaultPath("test.jpg");
 constexpr char kOutputDir[] = "./output";
 const std::string kDetModelDir =
-    BuildDefaultPath("../../../models/PP-OCRv4_mobile_det_infer");
+    BuildDefaultPath("../../models/PP-OCRv4_mobile_det_infer");
 const std::string kRecModelDir =
-    BuildDefaultPath("../../../models/PP-OCRv4_mobile_rec_infer");
+    BuildDefaultPath("../../models/PP-OCRv4_mobile_rec_infer");
 const std::string kTextlineOriModelDir =
-    BuildDefaultPath("../../../models/PP-LCNet_x1_0_textline_ori_infer");
+    BuildDefaultPath("../../models/PP-LCNet_x1_0_textline_ori_infer");
 
 PaddleOCRParams CreateDefaultParams() {
   PaddleOCRParams params;
