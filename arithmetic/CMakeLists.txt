@@ -13,8 +13,8 @@ find_package(OpenCV REQUIRED)
 
 get_filename_component(ARITHMETIC_PROJECT_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
 
-set(PADDLE_DIR "${ARITHMETIC_PROJECT_ROOT}/ocr_deps/paddle_inference" CACHE PATH "Path to Paddle Inference root")
-set(PADDLEOCR_CPP_DIR "${ARITHMETIC_PROJECT_ROOT}/PaddleOCR/deploy/cpp_infer" CACHE PATH "Path to PaddleOCR C++ deploy directory")
+set(PADDLE_DIR "${ARITHMETIC_PROJECT_ROOT}/../../../third_party/paddle_inference" CACHE PATH "Path to Paddle Inference root")
+set(PADDLEOCR_CPP_DIR "${ARITHMETIC_PROJECT_ROOT}/../../../PaddleOCR/deploy/cpp_infer" CACHE PATH "Path to PaddleOCR C++ deploy directory")
 
 set(PADDLE_INCLUDE_DIR "${PADDLE_DIR}/paddle/include")
 set(PADDLE_LIB_DIR "${PADDLE_DIR}/paddle/lib")

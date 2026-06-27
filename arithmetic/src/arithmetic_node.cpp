@@ -31,7 +31,7 @@ std::string BuildDefaultCameraConfigPath() {
 }
 
 std::string BuildDefaultModelPath(const char *suffix) {
-  return std::string(ARITHMETIC_SOURCE_DIR) + "/models/" + suffix;
+  return std::string(ARITHMETIC_SOURCE_DIR) + "/../../../models/" + suffix;
 }
 
 }  // namespace
