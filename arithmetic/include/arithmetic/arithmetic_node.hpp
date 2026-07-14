@@ -1,6 +1,7 @@
 #pragma once
 
 #include <atomic>
+#include <chrono>
 #include <condition_variable>
 #include <cstdint>
 #include <memory>
@@ -39,6 +40,7 @@ private:
   void AcquisitionWorker();
   void CalculationWorker();
   void RunCalculationTask();
+  bool WaitBeforeRecognition();
 
   bool TryGetCurrentFrame(cv::Mat &frame, std::uint64_t &frame_id);
   bool WaitForNextFrame(std::uint64_t last_frame_id,

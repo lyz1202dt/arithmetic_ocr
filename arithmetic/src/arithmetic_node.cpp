@@ -16,6 +16,7 @@ constexpr char kNodeName[] = "arithmetic_node";
 constexpr char kStartCalcParameter[] = "start_calc";
 constexpr char kShowImageParameter[] = "show_image";
 constexpr char kPreviewWindowName[] = "Arithmetic Camera Preview";
+constexpr int kRecognitionDelaySeconds = 15;
 
 std::string GetEnvOrDefault(const char *name, const std::string &fallback) {
   const char *value = std::getenv(name);
@@ -210,6 +211,12 @@ void ArithmeticNode::CalculationWorker() {
 }
 
 void ArithmeticNode::RunCalculationTask() {
+  UpdateOverlay("等待 OCR 识别", "");
+  if (!WaitBeforeRecognition()) {
+    UpdateOverlay("已取消", "");
+    return;
+  }
+
   const RuntimeConfig runtime_config = LoadRuntimeConfig();
   const auto deadline = std::chrono::steady_clock::now() +
                         std::chrono::milliseconds(runtime_config.timeout_ms);
@@ -260,6 +267,14 @@ void ArithmeticNode::RunCalculationTask() {
       return;
     }
   }
+}
+
+bool ArithmeticNode::WaitBeforeRecognition() {
+  std::unique_lock<std::mutex> lock(calc_mutex_);
+  return !calc_cv_.wait_for(
+      lock, std::chrono::seconds(kRecognitionDelaySeconds), [this] {
+        return !worker_running_.load() || cancel_requested_.load();
+      });
 }
 
 bool ArithmeticNode::TryGetCurrentFrame(cv::Mat &frame, std::uint64_t &frame_id) {
